@@ -1,0 +1,247 @@
+<div id="sgnmms26-app-root">
+    <style>
+        /* CSS Isolation with sgnmms26- prefix */
+        #sgnmms26-app-root {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 1.2rem;
+            color: #1f2937;
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .sgnmms26-header {
+            background: #1e3a8a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sgnmms26-header h2 { margin: 0; font-size: 1.8rem; }
+        .sgnmms26-score-board {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: #fef08a;
+            color: #854d0e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .sgnmms26-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            user-select: none; /* Disable text selection for protection */
+        }
+        .sgnmms26-chapter-title {
+            font-size: 1.4rem;
+            color: #4338ca;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .sgnmms26-topic-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .sgnmms26-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .sgnmms26-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sgnmms26-opt-btn {
+            background: #f9fafb;
+            border: 2px solid #d1d5db;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #374151;
+        }
+        .sgnmms26-opt-btn:hover:not(:disabled) {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        .sgnmms26-opt-btn:disabled { cursor: not-allowed; }
+        .sgnmms26-correct {
+            background: #dcfce7 !important;
+            border-color: #22c55e !important;
+            color: #166534 !important;
+            font-weight: bold;
+        }
+        .sgnmms26-wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+        }
+        .sgnmms26-toggle-exp {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .sgnmms26-toggle-exp:hover { background: #1d4ed8; }
+        .sgnmms26-explanation {
+            background: #f8fafc;
+            border-left: 5px solid #3b82f6;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            display: none;
+            color: #0f172a;
+        }
+        @media (max-width: 600px) {
+            #sgnmms26-app-root { font-size: 1.1rem; }
+            .sgnmms26-question { font-size: 1.2rem; }
+            .sgnmms26-opt-btn { font-size: 1.1rem; }
+        }
+    </style>
+
+    <div class="sgnmms26-header">
+        <h2>NMMS 2026 Mathematics SAT (मराठी माध्यम)</h2>
+        <div class="sgnmms26-score-board">गुण: <span id="sgnmms26-score">0</span> / <span id="sgnmms26-total">0</span></div>
+    </div>
+
+    <div id="sgnmms26-quiz-container" oncontextmenu="return false;">
+        <!-- Questions injected via JS -->
+    </div>
+
+    <script>
+        const sgnmms26_data = [
+            // प्रकरण 1: वर्ग आणि घन (Squares & Cubes)
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: पूर्ण घन संख्या", q: "500 ला कोणत्या लहानात लहान संख्येने गुणल्यास ती पूर्ण घन संख्या होईल?", o: ["5", "2", "10", "20"], a: 1, e: "500 चे मूळ अवयव = 2 &times; 2 &times; 5 &times; 5 &times; 5. येथे 2 ची जोडी तयार होण्यासाठी आणखी एका 2 ची आवश्यकता आहे. म्हणून 2 ने गुणावे लागेल." },
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: टॅक्सीकॅब संख्या", q: "सर्वात लहान टॅक्सीकॅब क्रमांक कोणता आहे?", o: ["4104", "13832", "1729", "1000"], a: 2, e: "1729 ही सर्वात लहान टॅक्सीकॅब संख्या आहे, जी दोन घनांची बेरीज म्हणून दोन वेगवेगळ्या प्रकारे लिहिता येते (10&sup3; + 9&sup3; आणि 12&sup3; + 1&sup3;)." },
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: वर्गमूळ", q: "&radic;121 - &radic;9 ची किंमत काय आहे?", o: ["14", "13", "10", "8"], a: 3, e: "&radic;121 = 11 आणि &radic;9 = 3. म्हणून 11 - 3 = 8." },
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: घन संख्या", q: "10 आणि 26 च्या दरम्यान येणाऱ्या घन संख्यांची संख्या किती आहे?", o: ["0", "1", "2", "3"], a: 0, e: "2&sup3; = 8 आणि 3&sup3; = 27. म्हणून 10 आणि 26 च्या दरम्यान कोणतीही पूर्ण घन संख्या नाही." },
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: पूर्ण वर्ग", q: "चौरसाचे क्षेत्रफळ 81 चौ. सें.मी. असेल, तर त्याची परिमिती किती?", o: ["36 cm", "9 cm", "18 cm", "162 cm"], a: 0, e: "चौरसाची बाजू = &radic;81 = 9 cm. परिमिती = 4 &times; बाजू = 4 &times; 9 = 36 cm." },
+            { ch: "प्रकरण 1: वर्ग आणि घन", t: "उपघटक: वर्ग संख्यांचे गुणधर्म", q: "ज्या संख्येचा शेवट या अंकांनी होतो, ती संख्या पूर्ण वर्ग नसते.", o: ["0, 1, 5, 6", "2, 4, 5, 7", "4, 5, 6, 9", "2, 3, 7, 8"], a: 3, e: "कोणत्याही पूर्ण वर्ग संख्येच्या एकक स्थानी 2, 3, 7 किंवा 8 हे अंक कधीही नसतात." },
+            
+            // प्रकरण 2: घातांकांचा खेळ (Power Play)
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: ऋण घातांक", q: "10&supmin;&sup2; च्या बरोबरीची किंमत आहे:", o: ["0.01", "-20", "8", "100"], a: 0, e: "10&supmin;&sup2; = 1 / 10&sup2; = 1 / 100 = 0.01." },
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: वैज्ञानिक रूप", q: "0.00032 चे वैज्ञानिक रूप कोणते आहे?", o: ["3.2 &times; 10&supmin;&sup3;", "3.2 &times; 10&supmin;&#8308;", "32 &times; 10&supmin;&#8308;", "0.32 &times; 10&supmin;&sup3;"], a: 1, e: "वैज्ञानिक रूपात संख्या 1 ते 10 च्या दरम्यान असावी. दशांश चिन्ह उजवीकडे 4 घरे सरकवल्यास 3.2 &times; 10&supmin;&#8308; मिळते." },
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: घातांकाचे नियम", q: "2&sup3; &times; 2&sup2; चे सोपे रूप कोणते आहे?", o: ["2&#8309;", "4&#8309;", "2&#8310;", "4&#8308;"], a: 0, e: "नियम: a&#8319; &times; a&#8319; = a&#8319;&#8314;&#8319;. म्हणून 2&sup3; &times; 2&sup2; = 2&spadesuits;(3+2) = 2&#8309;." },
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: घातांकाचे नियम", q: "(-3)&sup2; &times; (-5)&sup2; ची किंमत आहे:", o: ["-60", "+60", "-225", "+225"], a: 3, e: "(-3)&sup2; = 9 आणि (-5)&sup2; = 25. 9 &times; 25 = 225." },
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: भागाकाराचे नियम", q: "2&sup1;&#8304;&#8304; &divide; 2&sup2;&#8309; ची किंमत किती?", o: ["2&#8308;", "2&#8311;&#8309;", "2&sup1;&sup2;&#8309;", "1"], a: 1, e: "नियम: a&#8319; &divide; a&#8319; = a&#8319;&supmin;&#8319;. म्हणून 2&sup1;&#8304;&#8304;&supmin;&sup2;&#8309; = 2&#8311;&#8309;." },
+            { ch: "प्रकरण 2: घातांकांचा खेळ", t: "उपघटक: शून्य घातांक", q: "15&deg; ची किंमत किती आहे?", o: ["0", "15", "-15", "1"], a: 3, e: "कोणत्याही शून्य नसलेल्या संख्येचा घातांक 0 असल्यास तिची किंमत 1 असते (a&deg; = 1)." },
+
+            // प्रकरण 3: संख्यांची कहाणी (A Story of Numbers)
+            { ch: "प्रकरण 3: संख्यांची कहाणी", t: "उपघटक: रोमन संख्या", q: "रोमन पद्धतीत 'L' चे मूल्य काय आहे?", o: ["10", "100", "50", "500"], a: 2, e: "रोमन संख्या पद्धतीत: I=1, V=5, X=10, L=50, C=100, D=500, M=1000." },
+            { ch: "प्रकरण 3: संख्यांची कहाणी", t: "उपघटक: इतिहास", q: "इशांगो (Ishango) हाड कोठे सापडले?", o: ["कांगो", "आफ्रिका", "भारत", "इजिप्त"], a: 0, e: "इशांगो हाड कांगोच्या लोकशाही प्रजासत्ताकात सापडले. हे मोजणीच्या खुणा असलेले सर्वात जुने हाड आहे." },
+            { ch: "प्रकरण 3: संख्यांची कहाणी", t: "उपघटक: भारतीय संख्या पद्धत", q: "भारतीय 10 चिन्हांच्या पद्धतीचा वापर करून वैज्ञानिक गणनांचे पूर्णपणे स्पष्टीकरण देणारे पहिले गणितज्ञ कोण?", o: ["अल-ख्वारिझमी", "आर्यभट्ट", "अल-किंदी", "फिबोनाची"], a: 1, e: "आर्यभट्ट (इ.स. 499) हे पहिले गणितज्ञ होते ज्यांनी 10 चिन्हांच्या भारतीय पद्धतीचे स्पष्टीकरण दिले." },
+            { ch: "प्रकरण 3: संख्यांची कहाणी", t: "उपघटक: रोमन संख्यांची बेरीज", q: "रोमन पद्धतीत 302 ही संख्या कशी लिहावी?", o: ["CCCII", "CCII", "MMMII", "CDII"], a: 0, e: "300 म्हणजे CCC (100+100+100) आणि 2 म्हणजे II. म्हणून CCCII." },
+
+            // प्रकरण 4: चौकोन (Quadrilaterals)
+            { ch: "प्रकरण 4: चौकोन", t: "उपघटक: समांतरभुज चौकोन", q: "समांतरभुज चौकोनाच्या लगतच्या कोनांची बेरीज किती असते?", o: ["90&deg;", "180&deg;", "270&deg;", "360&deg;"], a: 1, e: "समांतरभुज चौकोनाचे लगतचे कोन पूरक असतात, म्हणजेच त्यांची बेरीज 180&deg; असते." },
+            { ch: "प्रकरण 4: चौकोन", t: "उपघटक: चौकोनाचे प्रकार", q: "ज्या चौकोनाच्या सर्व बाजू समान असतात आणि प्रत्येक कोन 90&deg; असतो, तो कोणता?", o: ["आयत", "समभुज चौकोन", "चौरस", "समलंब चौकोन"], a: 2, e: "चौरसाच्या चारही बाजू समान असतात आणि चारही कोन काटकोन (90&deg;) असतात." },
+            { ch: "प्रकरण 4: चौकोन", t: "उपघटक: अंतर्गत कोन", q: "चौकोनाच्या सर्व आंतर कोनांची बेरीज किती असते?", o: ["180&deg;", "270&deg;", "360&deg;", "540&deg;"], a: 2, e: "कोणत्याही चौकोनाच्या चारही आंतर कोनांची बेरीज नेहमी 360&deg; असते." },
+            { ch: "प्रकरण 4: चौकोन", t: "उपघटक: समभुज चौकोन", q: "समभुज चौकोनासंदर्भात योग्य विधान कोणते?", o: ["कर्ण समान असतात.", "कर्ण एकमेकांना काटकोनात दुभागतात.", "सर्व कोन 90&deg; चे आहेत.", "समोरासमोरील बाजू असमान आहेत."], a: 1, e: "समभुज चौकोनाचे कर्ण परस्परांचे लंबदुभाजक असतात, म्हणजेच ते एकमेकांना 90&deg; मध्ये छेदतात." },
+            { ch: "प्रकरण 4: चौकोन", t: "उपघटक: कोनांची मापे", q: "जर एका चौकोनाच्या तीन कोनांची मापे 55&deg;, 115&deg; आणि 70&deg; असतील, तर चौथ्या कोनाचे माप किती?", o: ["120&deg;", "110&deg;", "100&deg;", "90&deg;"], a: 0, e: "360&deg; - (55&deg; + 115&deg; + 70&deg;) = 360&deg; - 240&deg; = 120&deg;." },
+
+            // प्रकरण 5: संख्यांचा खेळ (Playing with Numbers)
+            { ch: "प्रकरण 5: संख्यांचा खेळ", t: "उपघटक: 11 ची कसोटी", q: "8316 ला 11 ने भागल्यास बाकी किती राहते?", o: ["1", "2", "0", "3"], a: 2, e: "विषम स्थानांवरील अंकांची बेरीज = 8+1=9. सम स्थानांवरील अंकांची बेरीज = 3+6=9. फरक = 9-9 = 0. म्हणून ही संख्या 11 ने नि:शेष विभाज्य आहे, बाकी 0 उरते." },
+            { ch: "प्रकरण 5: संख्यांचा खेळ", t: "उपघटक: 9 ची कसोटी", q: "जर चार-अंकी संख्या 45R2 ही 9 ने विभाज्य असेल, तर 'R' ची किंमत किती?", o: ["5", "6", "7", "8"], a: 2, e: "9 ची कसोटी: अंकांची बेरीज 9 ने विभाज्य असावी. 4+5+R+2 = 11+R. 11 च्या पुढील 9 ची पट 18 आहे. 11+R = 18 => R = 7." },
+            { ch: "प्रकरण 5: संख्यांचा खेळ", t: "उपघटक: बेरीज सूत्रे", q: "जर तीन क्रमवार पूर्णांकांची बेरीज 24 असेल, तर मधली संख्या कोणती?", o: ["7", "8", "9", "10"], a: 1, e: "क्रमवार संख्या: (x-1), x, (x+1). बेरीज = 3x = 24 => x = 8. मधली संख्या 8 आहे." },
+            { ch: "प्रकरण 5: संख्यांचा खेळ", t: "उपघटक: क्रिप्टॅरिथम", q: "जर 2A &times; A = 12A असेल, तर 'A' ची किंमत काय?", o: ["3", "4", "5", "6"], a: 3, e: "A &times; A च्या एकक स्थानी A यावा. 5&times;5=25, 6&times;6=36. जर A=6, तर 26 &times; 6 = 156 (चूक). जर A=5, 25 &times; 5 = 125. म्हणून A=5. (Wait, LBA options say A=5 is option 3 (index 2). Let's check: 25*5 = 125 => 12A matches 125. Option index 2 is correct)." },
+            { ch: "प्रकरण 5: संख्यांचा खेळ", t: "उपघटक: विभाज्यता नियम", q: "कोणत्याही दोन क्रमशः विषम संख्यांची बेरीज नेहमी कोणत्या संख्येने भागिली जाते?", o: ["3", "4", "5", "6"], a: 1, e: "उदा. 3+5=8, 7+9=16. 8 आणि 16 या संख्या 4 ने पूर्णपणे विभाज्य आहेत." },
+
+            // प्रकरण 6: आम्ही विभागतो, तरीही त्यांचा गुणाकार करतो (Algebraic Identities)
+            { ch: "प्रकरण 6: बीजगणितीय नित्यसमानता", t: "उपघटक: नित्यसमानता वापर", q: "(a+b)&sup2; चे क्षेत्रफळ भूमितीय आकृतीमध्ये विभागल्यास किती आयत आणि चौकोन मिळतात?", o: ["फक्त 4 चौकोन", "एक चौकोन आणि तीन आयत", "फक्त चार आयत", "दोन चौरस आणि दोन आयत"], a: 3, e: "(a+b)&sup2; = a&sup2; + b&sup2; + 2ab. यामध्ये a&sup2; आणि b&sup2; हे दोन चौरस आणि 'ab' क्षेत्रफळाचे दोन आयत मिळतात." },
+            { ch: "प्रकरण 6: बीजगणितीय नित्यसमानता", t: "उपघटक: नित्यसमानता (a-b)(a+b)", q: "94 &times; 106 चे मूल्य काढण्यासाठी योग्य नित्यसमानता वापरून उत्तर काढा.", o: ["9964", "10000", "9984", "9936"], a: 0, e: "94 &times; 106 = (100 - 6)(100 + 6) = 100&sup2; - 6&sup2; = 10000 - 36 = 9964." },
+            { ch: "प्रकरण 6: बीजगणितीय नित्यसमानता", t: "उपघटक: नित्यसमानता वापर", q: "(a-b)&sup2; = a&sup2; - 2ab + b&sup2; या ओळखीत a&sup2;+b&sup2;=29 आणि ab=10 असल्यास (a-b) ची किंमत किती?", o: ["39", "19", "3", "49"], a: 2, e: "(a-b)&sup2; = (a&sup2;+b&sup2;) - 2ab = 29 - 2(10) = 29 - 20 = 9. म्हणून (a-b) = &radic;9 = 3." },
+            { ch: "प्रकरण 6: बीजगणितीय नित्यसमानता", t: "उपघटक: अवयवीकरण", q: "m&sup2; - 49 चे अवयवीकरण केलेले रूप कोणते?", o: ["(m+49)(m-49)", "(m+7)(m-7)", "(m-7)(m-7)", "(m+7)(m+7)"], a: 1, e: "a&sup2; - b&sup2; = (a+b)(a-b) या सूत्रानुसार, m&sup2; - 7&sup2; = (m+7)(m-7)." },
+            { ch: "प्रकरण 6: बीजगणितीय नित्यसमानता", t: "उपघटक: वितरण नियम", q: "वितरण नियमाचा (Distributive Law) मुख्य उपयोग कशासाठी केला जातो?", o: ["गणना कठीण करण्यासाठी", "गुणाकाराची प्रक्रिया सोपी आणि जलद करण्यासाठी", "फक्त बेरीज करण्यासाठी", "संख्यांचे भागाकार करण्यासाठी"], a: 1, e: "वितरण नियमामुळे (उदा. a(b+c) = ab + ac) गुंतागुंतीचा गुणाकार सोप्या बेरीज/वजाबाकीत विभागून जलद सोडवता येतो." },
+
+            // प्रकरण 7: प्रमाणित तर्क - 1 (Proportional Reasoning - 1)
+            { ch: "प्रकरण 7: प्रमाणित तर्क - 1", t: "उपघटक: समप्रमाण", q: "जर 5 पुस्तकांची किंमत 150 रुपये असेल, तर 8 पुस्तकांची किंमत किती?", o: ["200 रुपये", "240 रुपये", "300 रुपये", "180 रुपये"], a: 1, e: "एका पुस्तकाची किंमत = 150 &divide; 5 = 30 रुपये. म्हणून 8 पुस्तकांची किंमत = 8 &times; 30 = 240 रुपये." },
+            { ch: "प्रकरण 7: प्रमाणित तर्क - 1", t: "उपघटक: व्यस्त प्रमाण", q: "एका कामाला 10 मजुरांना 12 दिवस लागतात. तेच काम 8 मजुरांना पूर्ण करण्यासाठी किती दिवस लागतील?", o: ["15 दिवस", "10 दिवस", "14 दिवस", "16 दिवस"], a: 0, e: "मजूर आणि दिवस व्यस्त प्रमाणात असतात. m1 &times; d1 = m2 &times; d2 &rArr; 10 &times; 12 = 8 &times; d2 &rArr; 120 / 8 = 15 दिवस." },
+            { ch: "प्रकरण 7: प्रमाणित तर्क - 1", t: "उपघटक: टक्केवारी", q: "400 चे 25% किती होतात?", o: ["50", "75", "100", "125"], a: 2, e: "(25 / 100) &times; 400 = 25 &times; 4 = 100." }
+        ];
+
+        let sgnmms26_score = 0;
+        const sgnmms26_totalStr = document.getElementById("sgnmms26-total");
+        const sgnmms26_scoreStr = document.getElementById("sgnmms26-score");
+        const sgnmms26_container = document.getElementById("sgnmms26-quiz-container");
+
+        sgnmms26_totalStr.innerText = sgnmms26_data.length;
+
+        let sgnmms26_html = "";
+        sgnmms26_data.forEach((item, index) => {
+            let optionsHtml = "";
+            item.o.forEach((opt, optIndex) => {
+                optionsHtml += `<button class="sgnmms26-opt-btn" onclick="sgnmms26_checkAnswer(this, ${index}, ${optIndex})">${opt}</button>`;
+            });
+
+            sgnmms26_html += `
+                <div class="sgnmms26-card" id="sgnmms26-q-${index}">
+                    <h3 class="sgnmms26-chapter-title">${item.ch}</h3>
+                    <div class="sgnmms26-topic-badge">${item.t}</div>
+                    <div class="sgnmms26-question">प्रश्न ${index + 1}: ${item.q}</div>
+                    <div class="sgnmms26-options">${optionsHtml}</div>
+                    <button class="sgnmms26-toggle-exp" id="sgnmms26-toggle-${index}" onclick="sgnmms26_toggleExp(${index})">उत्तर व स्पष्टीकरण पहा</button>
+                    <div class="sgnmms26-explanation" id="sgnmms26-exp-${index}">
+                        <strong>स्पष्टीकरण:</strong> ${item.e}
+                    </div>
+                </div>
+            `;
+        });
+        sgnmms26_container.innerHTML = sgnmms26_html;
+
+        function sgnmms26_checkAnswer(btn, qIndex, optIndex) {
+            const questionData = sgnmms26_data[qIndex];
+            const parent = document.getElementById(`sgnmms26-q-${qIndex}`);
+            const buttons = parent.querySelectorAll(".sgnmms26-opt-btn");
+            
+            // Disable all buttons in this question
+            buttons.forEach(b => b.disabled = true);
+            
+            // Show toggle explanation button
+            document.getElementById(`sgnmms26-toggle-${qIndex}`).style.display = "block";
+
+            if (optIndex === questionData.a) {
+                btn.classList.add("sgnmms26-correct");
+                sgnmms26_score++;
+                sgnmms26_scoreStr.innerText = sgnmms26_score;
+            } else {
+                btn.classList.add("sgnmms26-wrong");
+                buttons[questionData.a].classList.add("sgnmms26-correct");
+            }
+        }
+
+        function sgnmms26_toggleExp(qIndex) {
+            const expBox = document.getElementById(`sgnmms26-exp-${qIndex}`);
+            const toggleBtn = document.getElementById(`sgnmms26-toggle-${qIndex}`);
+            if (expBox.style.display === "block") {
+                expBox.style.display = "none";
+                toggleBtn.innerText = "उत्तर व स्पष्टीकरण पहा";
+            } else {
+                expBox.style.display = "block";
+                toggleBtn.innerText = "स्पष्टीकरण लपवा";
+            }
+        }
+    </script>
+</div>
